@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Preço de Viajem - Adrian Kauã xavier</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Calcular o Preço da Viagem</h1>
+    <div class="box">
+      <h2>Preencha os Campos Abaixo</h2>
+      <form id="viagemForm">
+        <label for="nomeViagem">Nome da Viagem:</label>
+        <input type="text" id="nomeViagem" required />
+
+        <label for="kmPercorridos">Quilômetros percorridos na Viagem:</label>
+        <input type="number" id="kmPercorridos" required />
+
+        <label for="litrosCombustivel">Combustível gastos em litros:</label>
+        <input type="number" id="litrosCombustivel" required />
+
+        <label for="valorLitroCombustivel"
+          >Valor do litro (R$):</label
+        >
+        <input type="number" id="valorLitroCombustivel" required />
+
+        <button type="button" onclick="CalcPrice()">Calcular</button>
+      </form>
+    </div>
+
+    <div class="box" id="resultado"></div>
+    <script>
+      function CalcPrice() {
+        const resultadoDiv = document.getElementById("resultado");
+        const nomeViagem = document.getElementById("nomeViagem").value;
+        const kmPercorridos = parseFloat(
+          document.getElementById("kmPercorridos").value
+        );
+        const litrosCombustivel = parseFloat(
+          document.getElementById("litrosCombustivel").value
+        );
+        const valorLitroCombustivel = parseFloat(
+          document.getElementById("valorLitroCombustivel").value
+        );
+          const autonomia = kmPercorridos / litrosCombustivel;
+          const valorViagem = litrosCombustivel * valorLitroCombustivel;
+          const valorPorKm = valorViagem / kmPercorridos;
+
+          resultadoDiv.innerHTML = `
+             <h3>Resumo da viagem:</h3>
+             <p>Em sua viajem para ${nomeViagem}, você percorreu ${kmPercorridos}Km e gastou ${litrosCombustivel} litros de combustível.</p>
+             <p>Nesta viajem seu carro fez ${autonomia.toFixed(
+               2
+             )}Km/L e ela teve um custo de R$${valorViagem.toFixed(
+            2
+          )}, sendo R$${valorPorKm.toFixed(2)}/L</p>`;
+       
+      }
+    </script>
+  </body>
+</html>
